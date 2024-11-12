@@ -1,0 +1,18 @@
+@import "./config.scss";
+
+body {
+  background-color: $pastel-gray;
+}
+
+.logo {
+  font-family: $logo-font;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: capitalize;
+  font-size: 3rem;
+  color: $japanese-indigo;
+}
+
+.heart-icon {
+  color: $japanese-indigo;
+}
