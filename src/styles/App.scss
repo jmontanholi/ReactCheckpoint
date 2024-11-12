@@ -4,15 +4,15 @@ body {
   background-color: $pastel-gray;
 }
 
-.logo {
-  font-family: $logo-font;
-  font-weight: 400;
-  font-style: normal;
-  text-transform: capitalize;
-  font-size: 3rem;
-  color: $japanese-indigo;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
 }
 
-.heart-icon {
-  color: $japanese-indigo;
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
