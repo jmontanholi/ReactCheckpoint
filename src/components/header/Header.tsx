@@ -10,6 +10,7 @@ import {
 
 import style from "./Header.module.scss";
 import { NavLink } from "react-router-dom";
+import Logo from "../logo/Logo.tsx";
 
 const links = [
   {
@@ -54,13 +55,14 @@ function Header() {
           </button>
         )}
 
-        <p className={`${style["header__logo"]}`}>cottage core</p>
+        <Logo />
       </div>
 
       {(showMenu || width > 1024) && (
         <>
           {links.map((link, index) => (
             <NavLink
+              key={link.path}
               to={link.path}
               className={({ isActive }) =>
                 `${style["header__link"]} ${

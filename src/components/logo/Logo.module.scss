@@ -1,0 +1,11 @@
+@use "../../assets/styles/config.scss" as *;
+
+.logo {
+  font-family: $logo-font;
+  font-weight: 400;
+  font-style: normal;
+  text-transform: capitalize;
+  font-size: calc(2rem + 2vw);
+  user-select: none;
+  color: $japanese-indigo;
+}

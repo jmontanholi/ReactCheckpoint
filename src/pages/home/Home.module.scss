@@ -1,0 +1,23 @@
+@use "../../assets/styles/config.scss" as *;
+
+.home {
+  height: calc(100vh - 4.22rem);
+  background: linear-gradient(
+      to left,
+      $japanese-indigo-transparent,
+      $hookers-green
+    ),
+    url(../../assets/images/hero.webp);
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__text-container {
+  }
+
+  @media screen and (min-width: 1023px) {
+    height: calc(100vh - 5.5rem);
+  }
+}
