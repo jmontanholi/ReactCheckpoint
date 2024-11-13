@@ -16,3 +16,11 @@ html {
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
+
+main {
+  margin-top: $header-height;
+
+  @media screen and (min-width: 1023px) {
+    margin-top: $header-height-desktop;
+  }
+}

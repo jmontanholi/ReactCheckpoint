@@ -1,7 +1,7 @@
 @use "../../assets/styles/config.scss" as *;
 
 .home {
-  height: calc(100vh - 4.22rem);
+  height: calc(100vh - $header-height);
   background: linear-gradient(
       to left,
       $japanese-indigo-transparent,
@@ -13,11 +13,58 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 0 1rem;
 
   &__text-container {
+    color: $pastel-gray;
+    text-align: center;
+    display: grid;
+    grid-template-rows: repeat(4, min-content);
+    justify-items: center;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 3rem;
+  }
+
+  &__subtitle {
+    font-size: 1.5rem;
+
+    span {
+      font-size: 2rem;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      text-decoration: underline;
+    }
+  }
+
+  &__text {
+    margin: 1rem 0;
+  }
+
+  &__cta {
+    color: inherit;
+    font-size: 1.5rem;
+    border: none;
+    padding: 0.5rem;
+    background-color: $japanese-indigo;
+    border-radius: 0.5rem;
+    margin: 1rem;
+    text-decoration: none;
+    transition: 0.3s all;
+
+    &:hover {
+      transform: scale(1.02);
+      text-decoration: underline;
+    }
   }
 
   @media screen and (min-width: 1023px) {
-    height: calc(100vh - 5.5rem);
+    height: calc(100vh - $header-height-desktop);
+
+    &__text-container {
+      width: 50%;
+    }
   }
 }

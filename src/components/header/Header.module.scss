@@ -2,51 +2,57 @@
 
 .header {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(min-content, 3rem) 1fr;
   justify-items: center;
   align-items: center;
-  padding: 0.5rem 0;
-
+  position: fixed;
   background-color: $white;
+  width: 100%;
+  padding: 0.5rem 0;
+  top: 0;
+  gap: 1rem;
   color: $japanese-indigo;
-
-  &--opened-menu {
-    grid-template-rows: repeat(5, 1fr);
-  }
-
-  &__logo-container {
-    width: 100%;
-    display: grid;
-    grid-template-columns: minmax(min-content, 3rem) 1fr;
-    justify-items: center;
-    align-items: center;
-  }
 
   &__menu-btn {
     border: none;
     background-color: transparent;
     color: inherit;
+    font-size: 1.5rem;
   }
 
+  &__menu-items {
+    grid-column: 1 / -1;
+
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, 1fr);
+  }
+
+  &__link,
   &__icon {
-    font-size: 1.5rem;
+    grid-column: 1 / -1;
+
+    color: inherit;
   }
 
   &__link,
   &__link:active,
   &__link:visited {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     color: inherit;
-    font-weight: 700;
-    font-family: $text-font;
+    font-weight: bold;
     text-decoration: none;
-    font-size: 1.2rem;
-    padding: 1rem;
+    padding: 0.5rem;
   }
 
-  &__link:hover,
+  &__icon {
+    background-color: transparent;
+    border: none;
+    font-size: 1.3rem;
+    padding: 0.5rem;
+  }
+
   &__link--active {
     text-decoration: underline;
   }
@@ -55,6 +61,7 @@
     grid-template-columns: repeat(2, 1fr) 2fr repeat(2, 1fr);
     grid-auto-flow: dense;
     justify-content: center;
+    height: $header-height-desktop;
 
     &__link-1 {
       grid-column: 1 / 2;
@@ -64,7 +71,7 @@
       grid-column: 2 / 3;
     }
 
-    &__logo-container {
+    &__logo {
       grid-column: 3 / 4;
       grid-template-columns: 1fr;
     }

@@ -41,22 +41,20 @@ function Header() {
     <header
       className={`${style.header} ${showMenu && style["header--opened-menu"]}`}
     >
-      <div className={`${style["header__logo-container"]}`}>
-        {width < 1024 && (
-          <button
-            className={style["header__menu-btn"]}
-            onClick={handleBarClick}
-            aria-label="menu button"
-          >
-            <FontAwesomeIcon
-              className={`${style["header__icon"]}`}
-              icon={showMenu ? faClose : faBars}
-            />
-          </button>
-        )}
+      {width < 1024 && (
+        <button
+          className={style["header__menu-btn"]}
+          onClick={handleBarClick}
+          aria-label="menu button"
+        >
+          <FontAwesomeIcon
+            className={`${style["header__icon"]}`}
+            icon={showMenu ? faClose : faBars}
+          />
+        </button>
+      )}
 
-        <Logo />
-      </div>
+      <Logo className={style["header__logo"]} />
 
       {(showMenu || width > 1024) && (
         <>
@@ -74,16 +72,19 @@ function Header() {
             </NavLink>
           ))}
 
-          <FontAwesomeIcon
-            aria-label="wishlist button"
+          <button
             className={`${style["header__icon"]} ${style["header__icon-1"]}`}
-            icon={false ? regularHeart : solidHeart}
-          />
-          <FontAwesomeIcon
-            aria-label="cart button"
+          >
+            <FontAwesomeIcon
+              aria-label="wishlist button"
+              icon={false ? regularHeart : solidHeart}
+            />
+          </button>
+          <button
             className={`${style["header__icon"]} ${style["header__icon-2"]}`}
-            icon={faCartShopping}
-          />
+          >
+            <FontAwesomeIcon aria-label="cart button" icon={faCartShopping} />
+          </button>
         </>
       )}
     </header>
