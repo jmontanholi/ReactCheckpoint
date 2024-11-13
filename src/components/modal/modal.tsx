@@ -30,14 +30,19 @@ const Modal: React.FC<{
     dispatch(toggleModal(modal));
   };
 
+  const handleClick = (e) => {
+    if (e.target.closest(".dialog-content")) {
+      console.log(e.target.closest(".dialog-content"));
+    }
+  };
+
   if (!modalRoot.current) {
     return null; // Don't render if the modal root isn't found
   }
 
   return createPortal(
-    <dialog ref={dialogRef} onClose={handleClose}>
-      {" "}
-      {children}
+    <dialog onClick={handleClick} ref={dialogRef} onClose={handleClose}>
+      <div className="dialog-content">{children}</div>
     </dialog>,
     modalRoot.current
   );
