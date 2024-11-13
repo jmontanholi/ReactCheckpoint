@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -9,8 +12,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import style from "./Header.module.scss";
-import { NavLink } from "react-router-dom";
 import Logo from "../logo/Logo";
+import { RootState } from "../../store/store";
+import { toggleModal } from "../../store/slices/modalSlice";
+import Wishlist from "../wishlist/Wishlist";
 
 const links = [
   {
@@ -26,6 +31,10 @@ const links = [
 function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
+  const wishlistItems = useSelector(
+    (state: RootState) => state.wishlist.products
+  );
+  const dispatch = useDispatch();
 
   const handleBarClick = () => {
     setShowMenu((prev) => !prev);
@@ -33,6 +42,10 @@ function Header() {
 
   const handleLinkClick = () => {
     setShowMenu(false);
+  };
+
+  const openWishlist = () => {
+    dispatch(toggleModal("wishlist"));
   };
 
   useEffect(() => {
@@ -78,17 +91,20 @@ function Header() {
           ))}
 
           <button
+            aria-label="open wishlist"
+            onClick={openWishlist}
             className={`${style["header__icon"]} ${style["header__icon-1"]}`}
           >
-            <FontAwesomeIcon
-              aria-label="wishlist button"
-              icon={false ? regularHeart : solidHeart}
-            />
+            <FontAwesomeIcon icon={false ? regularHeart : solidHeart} />
+            <span>{wishlistItems.length}</span>
           </button>
+          <Wishlist />
+
           <button
             className={`${style["header__icon"]} ${style["header__icon-2"]}`}
           >
-            <FontAwesomeIcon aria-label="cart button" icon={faCartShopping} />
+            <FontAwesomeIcon aria-label="open cart" icon={faCartShopping} />
+            <span>{0}</span>
           </button>
         </>
       )}

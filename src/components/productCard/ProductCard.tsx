@@ -8,20 +8,38 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import style from "./ProductCard.module.scss";
-import { useState } from "react";
 import formatNumberWithUserLocale from "../../helpers/numberFormater";
 import { truncateText } from "../../helpers/truncateText";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import {
+  addItemToWishlist,
+  removeItemFromWishlist,
+} from "../../store/slices/wishlistSlice";
 
 interface ProductCardProps {
   product: ProductInterface;
 }
 
 function ProductCard({ product }: ProductCardProps) {
-  const [whishlisted, setWishlisted] = useState(false);
+  const wishlistedItems = useSelector(
+    (state: RootState) => state.wishlist.products
+  );
 
-  const handleWishlist = () => {
-    setWishlisted((prev) => !prev);
+  const itemIsWishlisted = wishlistedItems.find(
+    (item) => item.id === product.id
+  );
+
+  const dispatch = useDispatch();
+
+  const handleAddToWishlist = () => {
+    dispatch(addItemToWishlist(product));
   };
+
+  const handleRemoveFromWishlist = () => {
+    dispatch(removeItemFromWishlist(product));
+  };
+
   return (
     <li className={style["product-card"]}>
       <img
@@ -33,10 +51,12 @@ function ProductCard({ product }: ProductCardProps) {
         aria-label="add to wishlist"
         role="button"
         className={`${style["product-card__heart-icon"]} ${
-          whishlisted ? style["product-card__heart-icon--selected"] : ""
+          itemIsWishlisted ? style["product-card__heart-icon--selected"] : ""
         }`}
-        icon={whishlisted ? solidHeart : regularHeart}
-        onClick={handleWishlist}
+        icon={itemIsWishlisted ? solidHeart : regularHeart}
+        onClick={() => {
+          itemIsWishlisted ? handleRemoveFromWishlist() : handleAddToWishlist();
+        }}
       />
       <div className={style["product-card__text-container"]}>
         <p className={style["product-card__title"]}>
