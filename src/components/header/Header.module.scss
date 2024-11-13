@@ -12,6 +12,7 @@
   top: 0;
   gap: 1rem;
   color: $japanese-indigo;
+  z-index: $header-zindex;
 
   &__menu-btn {
     border: none;

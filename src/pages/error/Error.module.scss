@@ -1,0 +1,9 @@
+@use "../../assets/styles/config.scss" as *;
+
+.error-page {
+  margin-top: $header-height;
+
+  @media screen and (min-width: 1023px) {
+    margin-top: $header-height-desktop;
+  }
+}

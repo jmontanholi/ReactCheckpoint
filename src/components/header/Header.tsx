@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import {
@@ -10,7 +10,7 @@ import {
 
 import style from "./Header.module.scss";
 import { NavLink } from "react-router-dom";
-import Logo from "../logo/Logo.tsx";
+import Logo from "../logo/Logo";
 
 const links = [
   {
@@ -29,6 +29,10 @@ function Header() {
 
   const handleBarClick = () => {
     setShowMenu((prev) => !prev);
+  };
+
+  const handleLinkClick = () => {
+    setShowMenu(false);
   };
 
   useEffect(() => {
@@ -62,6 +66,7 @@ function Header() {
             <NavLink
               key={link.path}
               to={link.path}
+              onClick={handleLinkClick}
               className={({ isActive }) =>
                 `${style["header__link"]} ${
                   style["header__link-" + (index + 1)]
