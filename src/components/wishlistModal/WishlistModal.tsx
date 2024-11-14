@@ -25,7 +25,7 @@ function WishlistModal() {
           </ul>
         ) : (
           <p className={style["wishlist-modal__fallback-text"]}>
-            No wishlisted items, go tag some products!
+            No wishlisted products, go tag some!
           </p>
         )}
       </section>

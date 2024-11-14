@@ -1,0 +1,14 @@
+@use "../../assets/styles/config.scss" as *;
+
+.icon-button {
+  border: 2px solid $japanese-indigo;
+  border-radius: $border-radius-default;
+  padding: 0.25rem;
+  transition: 0.2s all;
+
+  &:hover {
+    cursor: pointer;
+    color: $hookers-green;
+    border-color: $hookers-green;
+  }
+}

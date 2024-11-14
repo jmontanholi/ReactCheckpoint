@@ -30,14 +30,28 @@ export const cartSlice = createSlice({
       } else {
         state.products.push({ product: action.payload, quantity: 1 });
       }
+
+      state.totalPrice += action.payload.price;
     },
     removeItemFromCart: (state, action: PayloadAction<ProductInterface>) => {
-      state.products = state.products.filter(
-        (item) => item.product.id !== action.payload.id
+      const product = state.products.find(
+        (cartItem) => cartItem.product.id === action.payload.id
       );
+      if (!product) {
+        return state;
+      } else if (product.quantity === 1) {
+        state.products = state.products.filter(
+          (item) => item.product.id !== action.payload.id
+        );
+      } else {
+        product.quantity -= 1;
+      }
+
+      state.totalPrice -= action.payload.price;
     },
     removeAllFromCart: (state) => {
       state.products = [];
+      state.totalPrice = 0;
     },
   },
 });

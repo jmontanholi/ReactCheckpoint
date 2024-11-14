@@ -1,0 +1,55 @@
+@use "../../assets/styles/config.scss" as *;
+
+.cart-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem;
+  color: $japanese-indigo;
+
+  border: 1px solid $japanese-indigo;
+  border-radius: $border-radius-default;
+  background-color: $white;
+  position: relative;
+  box-shadow: $box-shadow-default;
+
+  &__image {
+    width: 12rem;
+    height: 12rem;
+    object-fit: contain;
+    border-bottom: 1px solid $japanese-indigo;
+    padding: 0.5rem;
+  }
+
+  &__content-container {
+    max-height: 15rem;
+    width: 100%;
+    flex: 1;
+    display: grid;
+    grid-template-rows: max-content minmax(4rem, 1fr) max-content;
+    gap: 1rem;
+  }
+
+  &__title {
+    font-weight: bold;
+  }
+
+  &__description {
+    font-size: 0.8rem;
+    overflow: auto;
+  }
+
+  &__quantity-container {
+    display: grid;
+    grid-template-columns: 1fr repeat(3, 2rem);
+    justify-items: center;
+    align-items: center;
+  }
+
+  &__price {
+    justify-self: start;
+    color: $hookers-green;
+    font-weight: bold;
+  }
+}

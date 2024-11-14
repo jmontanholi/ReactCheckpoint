@@ -1,3 +1,5 @@
+TODO: Standardize icon buttons into a reusable component
+
 # ReactCheckpoint
 
 Small online shop mock project for React practicing

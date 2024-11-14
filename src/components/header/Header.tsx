@@ -15,7 +15,8 @@ import style from "./Header.module.scss";
 import Logo from "../logo/Logo";
 import { RootState } from "../../store/store";
 import { openModal } from "../../store/slices/modalSlice";
-import WishlistModal from "../wishlistModal/WishlistModal";
+
+import { motion } from "motion/react";
 
 const links = [
   {
@@ -31,9 +32,17 @@ const links = [
 function Header() {
   const [showMenu, setShowMenu] = useState(false);
   const [width, setWidth] = useState(window.innerWidth);
-  const wishlistItems = useSelector(
-    (state: RootState) => state.wishlist.products
+  const wishlistItemsCount = useSelector(
+    (state: RootState) => state.wishlist.products.length
   );
+
+  const cartItemsCount = useSelector((state: RootState) =>
+    state.cart.products.reduce(
+      (accumulator, current) => accumulator + current.quantity,
+      0
+    )
+  );
+
   const dispatch = useDispatch();
 
   const handleBarClick = () => {
@@ -102,14 +111,34 @@ function Header() {
             className={`${style["header__icon"]} ${style["header__icon-1"]}`}
           >
             <FontAwesomeIcon icon={false ? regularHeart : solidHeart} />
-            <span>{wishlistItems.length}</span>
+            {wishlistItemsCount > 0 && (
+              <motion.span
+                key={wishlistItemsCount}
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1.2 }}
+              >
+                {wishlistItemsCount}
+              </motion.span>
+            )}
           </button>
 
           <button
+            aria-label="open cart"
+            onClick={() => {
+              handleOpenModal("cartModal");
+            }}
             className={`${style["header__icon"]} ${style["header__icon-2"]}`}
           >
-            <FontAwesomeIcon aria-label="open cart" icon={faCartShopping} />
-            <span>{0}</span>
+            <FontAwesomeIcon icon={faCartShopping} />
+            {cartItemsCount > 0 && (
+              <motion.span
+                key={cartItemsCount}
+                initial={{ scale: 0.8 }}
+                animate={{ scale: 1.2 }}
+              >
+                {cartItemsCount}
+              </motion.span>
+            )}
           </button>
         </>
       )}

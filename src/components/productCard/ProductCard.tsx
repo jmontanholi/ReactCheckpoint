@@ -16,6 +16,7 @@ import {
   addItemToWishlist,
   removeItemFromWishlist,
 } from "../../store/slices/wishlistSlice";
+import { addItemToCart } from "../../store/slices/cartSlice";
 
 interface ProductCardProps {
   product: ProductInterface;
@@ -38,6 +39,10 @@ function ProductCard({ product }: ProductCardProps) {
 
   const handleRemoveFromWishlist = () => {
     dispatch(removeItemFromWishlist(product));
+  };
+
+  const handleAddToCart = () => {
+    dispatch(addItemToCart(product));
   };
 
   return (
@@ -79,6 +84,7 @@ function ProductCard({ product }: ProductCardProps) {
         <FontAwesomeIcon
           role="button"
           aria-label="add to card"
+          onClick={handleAddToCart}
           className={style["product-card__cart-icon"]}
           icon={faCartPlus}
         />

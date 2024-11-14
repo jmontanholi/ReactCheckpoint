@@ -1,12 +1,12 @@
 // IMPROVED USING GEMINI PRO 1.5
 import { useEffect, useRef } from "react";
-import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { closeModal } from "../../store/slices/modalSlice";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import style from "./Modal.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
+import IconButton from "../iconButton/IconButton";
 
 const Modal: React.FC<{
   children: React.ReactNode;
@@ -59,10 +59,9 @@ const Modal: React.FC<{
             animate={{ opacity: 1, scale: 1 }}
             className={style["modal__content"]}
           >
-            <FontAwesomeIcon
-              aria-label="close modal"
-              role="button"
-              onClick={handleClose}
+            <IconButton
+              ariaLabel="close modal"
+              handleClick={handleClose}
               className={style["modal__close"]}
               icon={faClose}
             />
