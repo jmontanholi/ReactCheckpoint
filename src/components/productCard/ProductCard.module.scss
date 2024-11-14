@@ -1,8 +1,11 @@
 @use "../../assets/styles/config.scss" as *;
 
 .product-card {
-  width: 250px;
-  height: 250px;
+  width: 15.625rem; //250px
+  height: 15.625rem; //250px
+
+  display: grid;
+  grid-template-rows: 10rem 5.625rem;
 
   border: 1px solid $japanese-indigo;
   border-radius: $border-radius-default;
@@ -13,6 +16,7 @@
   &__image {
     width: 100%;
     height: 100%;
+    object-fit: contain;
     border-radius: $border-radius-default;
   }
 
@@ -52,10 +56,7 @@
   }
 
   &__text-container {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    flex: 1;
     background-color: $japanese-indigo;
     color: $pastel-gray;
     padding: 0.5rem;

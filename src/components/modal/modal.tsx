@@ -44,7 +44,7 @@ const Modal: React.FC<{
     return null; // Don't render if the modal root isn't found
   }
 
-  return createPortal(
+  return (
     <>
       {open && (
         <motion.dialog
@@ -70,8 +70,7 @@ const Modal: React.FC<{
           </motion.div>
         </motion.dialog>
       )}
-    </>,
-    modalRoot.current
+    </>
   );
 };
 

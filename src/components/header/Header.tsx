@@ -40,12 +40,13 @@ function Header() {
     setShowMenu((prev) => !prev);
   };
 
-  const handleLinkClick = () => {
+  const handleClose = () => {
     setShowMenu(false);
   };
 
-  const openWishlist = () => {
-    dispatch(openModal("wishlist"));
+  const handleOpenModal = (modal: string) => {
+    dispatch(openModal(modal));
+    handleClose();
   };
 
   useEffect(() => {
@@ -58,6 +59,7 @@ function Header() {
     <header
       className={`${style.header} ${showMenu && style["header--opened-menu"]}`}
     >
+      {/* Show Menu button if we are in a widht of less than 1024 */}
       {width < 1024 && (
         <button
           className={style["header__menu-btn"]}
@@ -71,15 +73,17 @@ function Header() {
         </button>
       )}
 
+      {/* Logo component */}
       <Logo className={style["header__logo"]} />
 
+      {/* Show menu items if the showMenu flag is true or if we are in desktop, then it should be shown by default */}
       {(showMenu || width > 1024) && (
         <>
           {links.map((link, index) => (
             <NavLink
               key={link.path}
               to={link.path}
-              onClick={handleLinkClick}
+              onClick={handleClose}
               className={({ isActive }) =>
                 `${style["header__link"]} ${
                   style["header__link-" + (index + 1)]
@@ -92,13 +96,14 @@ function Header() {
 
           <button
             aria-label="open wishlist"
-            onClick={openWishlist}
+            onClick={() => {
+              handleOpenModal("wishlist");
+            }}
             className={`${style["header__icon"]} ${style["header__icon-1"]}`}
           >
             <FontAwesomeIcon icon={false ? regularHeart : solidHeart} />
             <span>{wishlistItems.length}</span>
           </button>
-          <WishlistModal />
 
           <button
             className={`${style["header__icon"]} ${style["header__icon-2"]}`}
