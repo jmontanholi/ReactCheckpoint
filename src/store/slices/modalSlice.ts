@@ -12,10 +12,20 @@ const modalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
-    toggleModal: (state, action: PayloadAction<string>) => {
+    openModal: (state, action: PayloadAction<string>) => {
       switch (action.payload) {
         case "wishlist":
-          state.wishlistModalIsOpen = !state.wishlistModalIsOpen;
+          state.wishlistModalIsOpen = true;
+          break;
+
+        default:
+          break;
+      }
+    },
+    closeModal: (state, action: PayloadAction<string>) => {
+      switch (action.payload) {
+        case "wishlist":
+          state.wishlistModalIsOpen = false;
           break;
 
         default:
@@ -25,5 +35,5 @@ const modalSlice = createSlice({
   },
 });
 
-export const { toggleModal } = modalSlice.actions;
+export const { openModal, closeModal } = modalSlice.actions;
 export default modalSlice.reducer;

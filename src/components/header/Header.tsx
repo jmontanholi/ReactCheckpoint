@@ -14,8 +14,8 @@ import {
 import style from "./Header.module.scss";
 import Logo from "../logo/Logo";
 import { RootState } from "../../store/store";
-import { toggleModal } from "../../store/slices/modalSlice";
-import Wishlist from "../wishlist/Wishlist";
+import { openModal } from "../../store/slices/modalSlice";
+import WishlistModal from "../wishlist/WishlistModal";
 
 const links = [
   {
@@ -45,7 +45,7 @@ function Header() {
   };
 
   const openWishlist = () => {
-    dispatch(toggleModal("wishlist"));
+    dispatch(openModal("wishlist"));
   };
 
   useEffect(() => {
@@ -98,7 +98,7 @@ function Header() {
             <FontAwesomeIcon icon={false ? regularHeart : solidHeart} />
             <span>{wishlistItems.length}</span>
           </button>
-          <Wishlist />
+          <WishlistModal />
 
           <button
             className={`${style["header__icon"]} ${style["header__icon-2"]}`}

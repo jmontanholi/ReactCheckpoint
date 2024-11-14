@@ -1,0 +1,44 @@
+@use "../../assets/styles/config.scss" as *;
+
+.modal {
+  &__dialog {
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100%;
+    height: 100%;
+    background-color: $japanese-indigo-transparent;
+    border: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: $japanese-indigo;
+  }
+
+  &__content {
+    background-color: $white;
+    width: 95%;
+    height: 80%;
+    position: relative;
+    border-radius: $border-radius-default;
+    box-shadow: $box-shadow-default;
+  }
+
+  &__close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    border: 2px solid $japanese-indigo;
+    border-radius: $border-radius-default;
+    padding: 0.25rem 0.5rem;
+    transition: 0.2s all;
+
+    &:hover {
+      cursor: pointer;
+      color: $hookers-green;
+      border-color: $hookers-green;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 @forward "colors";
+@use "./colors.scss" as *;
 
 // Logo font
 @import url("https://fonts.googleapis.com/css2?family=Leckerli+One&display=swap");
@@ -17,3 +18,4 @@ $header-zindex: 1;
 $border-radius-default: 4px;
 $header-height: calc(3.65rem + 2vw);
 $header-height-desktop: 7rem;
+$box-shadow-default: 0 0 10px $japanese-indigo-transparent;

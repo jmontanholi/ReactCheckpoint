@@ -2,7 +2,11 @@
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
-import { toggleModal } from "../../store/slices/modalSlice";
+import { closeModal } from "../../store/slices/modalSlice";
+import { AnimatePresence, motion } from "motion/react";
+import style from "./Modal.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClose } from "@fortawesome/free-solid-svg-icons";
 
 const Modal: React.FC<{
   children: React.ReactNode;
@@ -27,12 +31,12 @@ const Modal: React.FC<{
   }, [open]);
 
   const handleClose = () => {
-    dispatch(toggleModal(modal));
+    dispatch(closeModal(modal));
   };
 
-  const handleClick = (e) => {
-    if (e.target.closest(".dialog-content")) {
-      console.log(e.target.closest(".dialog-content"));
+  const handleClick = (event) => {
+    if (!event.target.closest(`.${style["modal__content"]}`)) {
+      handleClose();
     }
   };
 
@@ -41,9 +45,32 @@ const Modal: React.FC<{
   }
 
   return createPortal(
-    <dialog onClick={handleClick} ref={dialogRef} onClose={handleClose}>
-      <div className="dialog-content">{children}</div>
-    </dialog>,
+    <>
+      {open && (
+        <motion.dialog
+          className={style["modal__dialog"]}
+          onClick={handleClick}
+          ref={dialogRef}
+          onClose={handleClose}
+          key={modal}
+        >
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className={style["modal__content"]}
+          >
+            <FontAwesomeIcon
+              aria-label="close modal"
+              role="button"
+              onClick={handleClose}
+              className={style["modal__close"]}
+              icon={faClose}
+            />
+            {children}
+          </motion.div>
+        </motion.dialog>
+      )}
+    </>,
     modalRoot.current
   );
 };
