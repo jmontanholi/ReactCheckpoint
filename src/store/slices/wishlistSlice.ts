@@ -4,12 +4,10 @@ import { ProductInterface } from "../../pages/products/Products";
 
 export interface WishlistInterface {
   products: ProductInterface[];
-  showWishlistModal: boolean;
 }
 
 const initialState: WishlistInterface = {
   products: [],
-  showWishlistModal: false,
 };
 
 export const wishlistSlice = createSlice({

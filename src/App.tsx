@@ -3,7 +3,7 @@ import Header from "./components/header/Header";
 import { Outlet } from "react-router-dom";
 
 import modalStyle from "./components/modal/Modal.module.scss";
-import WishlistModal from "./components/wishlist/WishlistModal";
+import WishlistModal from "./components/wishlistModal/WishlistModal";
 
 function App() {
   return (

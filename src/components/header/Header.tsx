@@ -15,7 +15,7 @@ import style from "./Header.module.scss";
 import Logo from "../logo/Logo";
 import { RootState } from "../../store/store";
 import { openModal } from "../../store/slices/modalSlice";
-import WishlistModal from "../wishlist/WishlistModal";
+import WishlistModal from "../wishlistModal/WishlistModal";
 
 const links = [
   {
@@ -97,7 +97,7 @@ function Header() {
           <button
             aria-label="open wishlist"
             onClick={() => {
-              handleOpenModal("wishlist");
+              handleOpenModal("wishlistModal");
             }}
             className={`${style["header__icon"]} ${style["header__icon-1"]}`}
           >

@@ -14,7 +14,7 @@ function WishlistModal() {
   );
 
   return (
-    <Modal open={wishlistIsOpen} modal="wishlist">
+    <Modal open={wishlistIsOpen} modal="wishlistModal">
       <section className={style["wishlist-modal"]}>
         <h1 className={style["wishlist-modal__title"]}>Wishlist</h1>
         {wishlistedItems.length > 0 ? (

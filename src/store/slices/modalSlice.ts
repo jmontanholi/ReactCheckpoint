@@ -2,10 +2,12 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface ModalState {
   wishlistModalIsOpen: boolean;
+  cartModalIsOpen: boolean;
 }
 
 const initialState: ModalState = {
   wishlistModalIsOpen: false,
+  cartModalIsOpen: false,
 };
 
 const modalSlice = createSlice({
@@ -13,24 +15,22 @@ const modalSlice = createSlice({
   initialState,
   reducers: {
     openModal: (state, action: PayloadAction<string>) => {
-      switch (action.payload) {
-        case "wishlist":
-          state.wishlistModalIsOpen = true;
-          break;
-
-        default:
-          break;
-      }
+      Object.keys(state).map((key) => {
+        if (key !== `${action.payload}IsOpen`) {
+          return (state[key] = false);
+        } else {
+          return (state[key] = true);
+        }
+      });
     },
     closeModal: (state, action: PayloadAction<string>) => {
-      switch (action.payload) {
-        case "wishlist":
-          state.wishlistModalIsOpen = false;
-          break;
+      Object.keys(state).map((key) => {
+        if (key === `${action.payload}IsOpen`) {
+          return (state[key] = false);
+        }
 
-        default:
-          break;
-      }
+        return state;
+      });
     },
   },
 });
