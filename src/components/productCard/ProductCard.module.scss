@@ -5,7 +5,7 @@
   height: 15.625rem; //250px
 
   display: grid;
-  grid-template-rows: 10rem 5.5rem;
+  grid-template-rows: 10rem 5.5rem; // Fixed rows to help setting up image size
 
   border: 1px solid $japanese-indigo;
   border-radius: $border-radius-default;
@@ -24,24 +24,15 @@
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
-    color: $pastel-gray;
-    background-color: $japanese-indigo;
     font-size: 1.5rem;
-    border-radius: $border-radius-default;
-    padding: 0.2rem;
     transition: 0.2s all;
+
+    background-color: $morning-blue;
+    color: $japanese-indigo;
 
     &:hover {
       cursor: pointer;
-      background-color: $hookers-green;
-    }
-
-    &--selected {
-      background-color: $hookers-green;
-
-      &:hover {
-        background-color: $japanese-indigo;
-      }
+      color: $hookers-green;
     }
   }
 
@@ -52,6 +43,7 @@
     &:hover {
       cursor: pointer;
       color: $morning-blue;
+      border: 2px solid transparent; // Since the component has border, if we remove the border here it will change height
     }
   }
 

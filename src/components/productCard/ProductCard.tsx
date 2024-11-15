@@ -17,6 +17,7 @@ import {
   removeItemFromWishlist,
 } from "../../store/slices/wishlistSlice";
 import { addItemToCart } from "../../store/slices/cartSlice";
+import IconButton from "../iconButton/IconButton";
 
 interface ProductCardProps {
   product: ProductInterface;
@@ -52,14 +53,11 @@ function ProductCard({ product }: ProductCardProps) {
         src={product.image}
         alt={product.title}
       />
-      <FontAwesomeIcon
-        aria-label="add to wishlist"
-        role="button"
-        className={`${style["product-card__heart-icon"]} ${
-          itemIsWishlisted ? style["product-card__heart-icon--selected"] : ""
-        }`}
+      <IconButton
+        ariaLabel="add to wishlist"
+        className={style["product-card__heart-icon"]}
         icon={itemIsWishlisted ? solidHeart : regularHeart}
-        onClick={() => {
+        handleClick={() => {
           itemIsWishlisted ? handleRemoveFromWishlist() : handleAddToWishlist();
         }}
       />
@@ -81,10 +79,9 @@ function ProductCard({ product }: ProductCardProps) {
             ({product.rating.count})
           </p>
         </div>
-        <FontAwesomeIcon
-          role="button"
-          aria-label="add to card"
-          onClick={handleAddToCart}
+        <IconButton
+          ariaLabel="add to cart"
+          handleClick={handleAddToCart}
           className={style["product-card__cart-icon"]}
           icon={faCartPlus}
         />

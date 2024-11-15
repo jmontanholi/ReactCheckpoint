@@ -17,6 +17,7 @@ import { RootState } from "../../store/store";
 import { openModal } from "../../store/slices/modalSlice";
 
 import { motion } from "motion/react";
+import IconButton from "../iconButton/IconButton";
 
 const links = [
   {
@@ -102,15 +103,16 @@ function Header() {
               {link.content}
             </NavLink>
           ))}
-
-          <button
-            aria-label="open wishlist"
-            onClick={() => {
-              handleOpenModal("wishlistModal");
-            }}
+          <div
             className={`${style["header__icon"]} ${style["header__icon-1"]}`}
           >
-            <FontAwesomeIcon icon={false ? regularHeart : solidHeart} />
+            <IconButton
+              ariaLabel="open wishlist"
+              handleClick={() => {
+                handleOpenModal("wishlistModal");
+              }}
+              icon={false ? regularHeart : solidHeart}
+            />
             {wishlistItemsCount > 0 && (
               <motion.span
                 key={wishlistItemsCount}
@@ -120,16 +122,17 @@ function Header() {
                 {wishlistItemsCount}
               </motion.span>
             )}
-          </button>
-
-          <button
-            aria-label="open cart"
-            onClick={() => {
-              handleOpenModal("cartModal");
-            }}
+          </div>
+          <div
             className={`${style["header__icon"]} ${style["header__icon-2"]}`}
           >
-            <FontAwesomeIcon icon={faCartShopping} />
+            <IconButton
+              ariaLabel="open cart"
+              handleClick={() => {
+                handleOpenModal("cartModal");
+              }}
+              icon={faCartShopping}
+            />
             {cartItemsCount > 0 && (
               <motion.span
                 key={cartItemsCount}
@@ -139,7 +142,7 @@ function Header() {
                 {cartItemsCount}
               </motion.span>
             )}
-          </button>
+          </div>
         </>
       )}
     </header>
