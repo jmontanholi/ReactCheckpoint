@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { closeModal } from "../../store/slices/modalSlice";
 import { motion } from "motion/react";
 import style from "./Modal.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import IconButton from "../iconButton/IconButton";
 
@@ -12,7 +11,8 @@ const Modal: React.FC<{
   children: React.ReactNode;
   open: boolean;
   modal: string;
-}> = ({ children, open, modal }) => {
+  title: string;
+}> = ({ children, open, modal, title }) => {
   const dialogRef = useRef<HTMLDialogElement | null>(null); // Correct type for dialogRef
   const modalRoot = useRef<HTMLElement | null>(null);
   const dispatch = useDispatch();
@@ -59,6 +59,7 @@ const Modal: React.FC<{
             animate={{ opacity: 1, scale: 1 }}
             className={style["modal__content"]}
           >
+            <h1 className={style["modal__title"]}>{title}</h1>
             <IconButton
               ariaLabel="close modal"
               handleClick={handleClose}

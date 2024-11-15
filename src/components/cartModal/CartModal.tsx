@@ -23,14 +23,12 @@ function WishlistModal() {
   };
 
   return (
-    <Modal open={cartIsOpen} modal="cartModal">
+    <Modal title="cart" open={cartIsOpen} modal="cartModal">
       <section
         className={`${style["cart-modal"]} ${
           cartItems.length > 0 ? style["cart-modal__with-items"] : ""
         }`}
       >
-        <h1 className={style["cart-modal__title"]}>Cart</h1>
-
         {cartItems.length > 0 ? (
           <>
             <ul className={style["cart-modal__item-list"]}>
