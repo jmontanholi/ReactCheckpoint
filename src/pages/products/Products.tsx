@@ -25,12 +25,12 @@ export const allProductsQuery = queryOptions({
       );
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        throw new Error("Something went wrong!");
       }
 
       return response.json();
     } catch (error) {
-      console.log("ERROR", error);
+      throw error;
     }
   },
 });

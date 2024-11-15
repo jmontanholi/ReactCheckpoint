@@ -2,6 +2,7 @@
 
 .error-page {
   margin-top: $header-height;
+  padding: 1rem;
 
   @media screen and (min-width: 1023px) {
     margin-top: $header-height-desktop;
