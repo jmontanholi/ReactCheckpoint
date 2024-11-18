@@ -81,6 +81,7 @@ function Header() {
       {/* Show Menu button if we are in a widht of less than 1024 */}
       {width < 1024 && (
         <IconButton
+          noBorder
           ariaLabel="open menu"
           handleClick={handleToggleMenu}
           icon={showMenu ? faClose : faBars}
@@ -112,6 +113,7 @@ function Header() {
             className={`${style["header__icon"]} ${style["header__icon-1"]}`}
           >
             <IconButton
+              noBorder
               ariaLabel="open wishlist"
               handleClick={() => {
                 handleOpenModal("wishlistModal");
@@ -133,6 +135,7 @@ function Header() {
             className={`${style["header__icon"]} ${style["header__icon-2"]}`}
           >
             <IconButton
+              noBorder
               ariaLabel="open cart"
               handleClick={() => {
                 handleOpenModal("cartModal");

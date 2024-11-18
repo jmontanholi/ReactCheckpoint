@@ -1,5 +1,5 @@
 // IMPROVED USING GEMINI PRO 1.5
-import { KeyboardEvent, MouseEvent, useEffect, useRef } from "react";
+import { MouseEvent, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../store/slices/modalSlice";
 import { motion } from "framer-motion";

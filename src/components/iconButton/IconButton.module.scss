@@ -4,15 +4,25 @@
   background-color: transparent;
   margin: 0;
   color: inherit;
+  aspect-ratio: 1 / 1;
 
   border: 2px solid $japanese-indigo;
   border-radius: $border-radius-default;
-  padding: 0.25rem;
+  padding: 0.125rem 0.25rem;
   transition: 0.2s all;
 
   &:hover {
     cursor: pointer;
     color: $hookers-green;
     border-color: $hookers-green;
+  }
+
+  &--no-border {
+    border: 2px solid transparent;
+  }
+
+  &--no-border:hover {
+    cursor: pointer;
+    border-color: transparent;
   }
 }

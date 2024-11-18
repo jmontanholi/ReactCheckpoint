@@ -12,7 +12,11 @@ function WishlistModal() {
 
   return (
     <Modal title="wishlist" modal="wishlistModal">
-      <section className={style["wishlist-modal"]}>
+      <section
+        aria-label="wishlist modal"
+        data-testid="wishlist-modal"
+        className={style["wishlist-modal"]}
+      >
         {wishlistedItems.length > 0 ? (
           <ul className={style["wishlist-modal__item-list"]}>
             {wishlistedItems.map((item) => (
@@ -20,7 +24,10 @@ function WishlistModal() {
             ))}
           </ul>
         ) : (
-          <p className={style["wishlist-modal__fallback-text"]}>
+          <p
+            aria-label="no wishlisted products"
+            className={style["wishlist-modal__fallback-text"]}
+          >
             No wishlisted products, go tag some!
           </p>
         )}

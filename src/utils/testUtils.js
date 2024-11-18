@@ -2,6 +2,7 @@ import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { setupStore } from "../store/store";
+import router from "../Router";
 
 // Use screen.logTestingPlaygroundURL() for query help
 
@@ -14,6 +15,7 @@ export function renderWithProviders(
   const Wrapper = ({ children }) => (
     <Provider store={store}>
       <BrowserRouter
+        router={router}
         future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
       >
         {children}

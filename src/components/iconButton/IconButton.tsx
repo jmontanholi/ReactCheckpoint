@@ -8,6 +8,7 @@ interface IconButtonPropsInterface {
   className?: string;
   icon: IconDefinition;
   ariaLabel: string;
+  noBorder?: boolean;
 }
 
 function IconButton({
@@ -15,12 +16,15 @@ function IconButton({
   className,
   icon,
   ariaLabel,
+  noBorder = false,
 }: IconButtonPropsInterface) {
   return (
     <button
       aria-label={ariaLabel}
       onClick={handleClick}
-      className={`${style["icon-button"]} ${className ? className : ""}`}
+      className={`${style["icon-button"]} ${className ? className : ""} ${
+        noBorder ? style["icon-button--no-border"] : ""
+      }`}
     >
       <FontAwesomeIcon data-testid={ariaLabel} icon={icon} />
     </button>

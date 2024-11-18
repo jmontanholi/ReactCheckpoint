@@ -47,8 +47,12 @@ function ProductCard({ product }: ProductCardProps) {
   };
 
   return (
-    <li className={style["product-card"]}>
+    <li
+      data-testid={`${product.title}-${product.id}`}
+      className={style["product-card"]}
+    >
       <img
+        aria-label={product.title}
         className={style["product-card__image"]}
         src={product.image}
         alt={product.title}
@@ -62,18 +66,18 @@ function ProductCard({ product }: ProductCardProps) {
         }}
       />
       <div className={style["product-card__text-container"]}>
-        <p className={style["product-card__title"]}>
-          {truncateText(product.title, 25)}
+        <p aria-label="product title" className={style["product-card__title"]}>
+          {truncateText(product.title, 23)}
         </p>
-        <p className={style["product-card__price"]}>
+        <p aria-label="product price" className={style["product-card__price"]}>
           {formatNumberWithUserLocale(product.price)}
         </p>
 
         <div className={style["product-card__rating"]}>
           <FontAwesomeIcon icon={faStar} />
-          <p aria-label="ratings">{product.rating.rate}</p>
+          <p aria-label="product ratings">{product.rating.rate}</p>
           <p
-            aria-label="ratings count"
+            aria-label="product ratings count"
             className={style["product-card__rating-count"]}
           >
             ({product.rating.count})
