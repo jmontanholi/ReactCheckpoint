@@ -8,6 +8,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+You will need to run `npm install` in the root of this project and also have a
+
+## .env file with the following: `REACT_APP_BASE_URL='https://fakestoreapi.com'`
+
 In the project directory, you can run:
 
 ### `npm start`
