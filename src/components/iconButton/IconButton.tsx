@@ -17,13 +17,13 @@ function IconButton({
   ariaLabel,
 }: IconButtonPropsInterface) {
   return (
-    <FontAwesomeIcon
-      role="button"
+    <button
       aria-label={ariaLabel}
       onClick={handleClick}
       className={`${style["icon-button"]} ${className ? className : ""}`}
-      icon={icon}
-    />
+    >
+      <FontAwesomeIcon data-testid={ariaLabel} icon={icon} />
+    </button>
   );
 }
 

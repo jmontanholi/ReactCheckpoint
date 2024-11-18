@@ -6,15 +6,12 @@ import Modal from "../modal/Modal";
 import style from "./WishlistModal.module.scss";
 
 function WishlistModal() {
-  const wishlistIsOpen = useSelector(
-    (state: RootState) => state.modal.wishlistModalIsOpen
-  );
   const wishlistedItems = useSelector(
     (state: RootState) => state.wishlist.products
   );
 
   return (
-    <Modal title="wishlist" open={wishlistIsOpen} modal="wishlistModal">
+    <Modal title="wishlist" modal="wishlistModal">
       <section className={style["wishlist-modal"]}>
         {wishlistedItems.length > 0 ? (
           <ul className={style["wishlist-modal__item-list"]}>

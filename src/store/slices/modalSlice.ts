@@ -15,6 +15,7 @@ const modalSlice = createSlice({
   initialState,
   reducers: {
     openModal: (state, action: PayloadAction<string>) => {
+      // Map through all the keys in our state and close all modals except for the one we dispatched to open
       Object.keys(state).map((key) => {
         if (key !== `${action.payload}IsOpen`) {
           return (state[key] = false);
@@ -24,12 +25,10 @@ const modalSlice = createSlice({
       });
     },
     closeModal: (state, action: PayloadAction<string>) => {
+      // Map through all the keys in our state and close all of them
+      // (Only one should be opened, so we just close all and avoid an if rule)
       Object.keys(state).map((key) => {
-        if (key === `${action.payload}IsOpen`) {
-          return (state[key] = false);
-        }
-
-        return state;
+        return (state[key] = false);
       });
     },
   },

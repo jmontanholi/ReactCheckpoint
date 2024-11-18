@@ -52,11 +52,11 @@
   &__icon {
     background-color: transparent;
     border: none;
-    font-size: 1.5rem;
     padding: 0.5rem;
     position: relative;
 
     svg {
+      font-size: 1.5rem;
       transition: 0.2s all;
     }
 
@@ -67,7 +67,7 @@
       }
     }
 
-    span {
+    p {
       position: absolute;
       right: -0.5rem;
       top: -0.5rem;
@@ -88,6 +88,10 @@
 
   &__link--active {
     text-decoration: underline;
+  }
+
+  &__menu-btn {
+    grid-column: 1 / 2;
   }
 
   @media screen and (min-width: 1023px) {

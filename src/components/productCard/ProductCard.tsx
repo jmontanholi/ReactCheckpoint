@@ -24,6 +24,8 @@ interface ProductCardProps {
 }
 
 function ProductCard({ product }: ProductCardProps) {
+  const dispatch = useDispatch();
+
   const wishlistedItems = useSelector(
     (state: RootState) => state.wishlist.products
   );
@@ -31,8 +33,6 @@ function ProductCard({ product }: ProductCardProps) {
   const itemIsWishlisted = wishlistedItems.find(
     (item) => item.id === product.id
   );
-
-  const dispatch = useDispatch();
 
   const handleAddToWishlist = () => {
     dispatch(addItemToWishlist(product));

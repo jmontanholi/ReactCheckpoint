@@ -6,7 +6,10 @@ interface LogoProps {
 
 function Logo({ className }: LogoProps) {
   return (
-    <p className={`${style["logo"]} ${className ? className : ""}`}>
+    <p
+      aria-label="logo"
+      className={`${style["logo"]} ${className ? className : ""}`}
+    >
       cottage core
     </p>
   );

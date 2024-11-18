@@ -1,53 +1,50 @@
 // IMPROVED USING GEMINI PRO 1.5
-import { useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { KeyboardEvent, MouseEvent, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../store/slices/modalSlice";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import style from "./Modal.module.scss";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import IconButton from "../iconButton/IconButton";
+import { RootState } from "../../store/store";
 
 const Modal: React.FC<{
   children: React.ReactNode;
-  open: boolean;
   modal: string;
   title: string;
-}> = ({ children, open, modal, title }) => {
+}> = ({ children, modal, title }) => {
   const dialogRef = useRef<HTMLDialogElement | null>(null); // Correct type for dialogRef
-  const modalRoot = useRef<HTMLElement | null>(null);
   const dispatch = useDispatch();
+  const isOpen = useSelector(
+    (state: RootState) => state.modal[`${modal}IsOpen`]
+  );
 
   useEffect(() => {
-    modalRoot.current = document.getElementById("modal"); // Get the modal root
-  }, []); // Empty dependency array ensures this runs only once
-
-  useEffect(() => {
-    if (open && dialogRef.current && modalRoot.current) {
-      // Check all refs
+    if (isOpen && dialogRef.current) {
       dialogRef.current.showModal();
-    } else if (!open && dialogRef.current) {
+    } else if (!isOpen && dialogRef.current) {
       dialogRef.current.close(); // Close the dialog when open is false
     }
-  }, [open]);
+  }, [isOpen]);
 
   const handleClose = () => {
     dispatch(closeModal(modal));
   };
 
-  const handleClick = (event) => {
-    if (!event.target.closest(`.${style["modal__content"]}`)) {
+  const handleClick = (event: MouseEvent) => {
+    const target = event.target as Element | null; // Allow for null
+
+    if (target && !target.closest(`.${style["modal__content"]}`)) {
+      // Type guard
       handleClose();
     }
   };
 
-  if (!modalRoot.current) {
-    return null; // Don't render if the modal root isn't found
-  }
-
   return (
     <>
-      {open && (
+      {isOpen && (
         <motion.dialog
+          data-testid="generic modal"
           className={style["modal__dialog"]}
           onClick={handleClick}
           ref={dialogRef}
@@ -59,7 +56,9 @@ const Modal: React.FC<{
             animate={{ opacity: 1, scale: 1 }}
             className={style["modal__content"]}
           >
-            <h1 className={style["modal__title"]}>{title}</h1>
+            <h1 aria-label="modal title" className={style["modal__title"]}>
+              {title}
+            </h1>
             <IconButton
               ariaLabel="close modal"
               handleClick={handleClose}

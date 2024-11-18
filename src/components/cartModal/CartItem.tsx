@@ -1,26 +1,24 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import formatNumberWithUserLocale from "../../helpers/numberFormater";
 import { ProductInterface } from "../../pages/products/Products";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import style from "./CartItem.module.scss";
 import IconButton from "../iconButton/IconButton";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   addItemToCart,
   removeItemFromCart,
 } from "../../store/slices/cartSlice";
-
-interface CartItemInterface {
-  product: ProductInterface;
-  quantity: number;
-}
+import { RootState } from "../../store/store";
 
 interface CartItemPropsInterface {
-  item: CartItemInterface;
+  productId: number;
 }
 
-function CartItem({ item }: CartItemPropsInterface) {
+function CartItem({ productId }: CartItemPropsInterface) {
   const dispatch = useDispatch();
+
+  const cartItems = useSelector((state: RootState) => state.cart.products);
+  const item = cartItems.find((item) => item.product.id === productId);
 
   const handleIncreaseQuantity = () => {
     dispatch(addItemToCart(item.product));
@@ -29,20 +27,29 @@ function CartItem({ item }: CartItemPropsInterface) {
   const handleDecreaseQuantity = () => {
     dispatch(removeItemFromCart(item.product));
   };
+
+  if (!item) return null;
+
   return (
     <li className={style["cart-item"]}>
       <img
+        aria-label="product image"
         className={style["cart-item__image"]}
         src={item.product.image}
         alt={item.product.title}
       />
       <div className={style["cart-item__content-container"]}>
-        <p className={style["cart-item__title"]}>{item.product.title}</p>
-        <p className={style["cart-item__description"]}>
+        <p aria-label="product title" className={style["cart-item__title"]}>
+          {item.product.title}
+        </p>
+        <p
+          aria-label="product description"
+          className={style["cart-item__description"]}
+        >
           {item.product.description}
         </p>
         <div className={style["cart-item__quantity-container"]}>
-          <p className={style["cart-item__price"]}>
+          <p aria-label="product price" className={style["cart-item__price"]}>
             {formatNumberWithUserLocale(item.product.price)}
           </p>
           <IconButton
@@ -51,7 +58,12 @@ function CartItem({ item }: CartItemPropsInterface) {
             ariaLabel="decrease product quantity"
             icon={faMinus}
           />
-          <p className={style["cart-item__quantity"]}>{item.quantity}</p>
+          <p
+            aria-label="product quantity"
+            className={style["cart-item__quantity"]}
+          >
+            {item.quantity}
+          </p>
           <IconButton
             className={style["cart-item__button"]}
             handleClick={handleIncreaseQuantity}

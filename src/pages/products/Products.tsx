@@ -16,6 +16,7 @@ export interface ProductInterface {
   };
 }
 
+// Declare query function
 export const allProductsQuery = queryOptions({
   queryKey: ["products"],
   queryFn: async () => {
@@ -35,6 +36,7 @@ export const allProductsQuery = queryOptions({
   },
 });
 
+// Configure loader using tanstack query with Router
 export const loader = (queryClient: QueryClient) => async () => {
   const products = await queryClient.ensureQueryData(allProductsQuery);
   return products;
