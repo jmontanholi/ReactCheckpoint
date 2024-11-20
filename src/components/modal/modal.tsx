@@ -13,7 +13,7 @@ const Modal: React.FC<{
   modal: string;
   title: string;
 }> = ({ children, modal, title }) => {
-  const dialogRef = useRef<HTMLDialogElement | null>(null); // Correct type for dialogRef
+  const dialogRef = useRef<HTMLDialogElement | null>(null); // Correct type for dialogRef.
   const dispatch = useDispatch();
   const isOpen = useSelector(
     (state: RootState) => state.modal[`${modal}IsOpen`]
