@@ -1,5 +1,4 @@
 import formatNumberWithUserLocale from "../../helpers/numberFormater";
-import { ProductInterface } from "../../pages/products/Products";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import style from "./CartItem.module.scss";
 import IconButton from "../iconButton/IconButton";
@@ -39,17 +38,12 @@ function CartItem({ productId }: CartItemPropsInterface) {
         alt={item.product.title}
       />
       <div className={style["cart-item__content-container"]}>
-        <p aria-label="product title" className={style["cart-item__title"]}>
-          {item.product.title}
-        </p>
-        <p
-          aria-label="product description"
-          className={style["cart-item__description"]}
-        >
+        <p className={style["cart-item__title"]}>{item.product.title}</p>
+        <p className={style["cart-item__description"]}>
           {item.product.description}
         </p>
         <div className={style["cart-item__quantity-container"]}>
-          <p aria-label="product price" className={style["cart-item__price"]}>
+          <p className={style["cart-item__price"]}>
             {formatNumberWithUserLocale(item.product.price)}
           </p>
           <IconButton

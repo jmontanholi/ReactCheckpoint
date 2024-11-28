@@ -1,4 +1,4 @@
-@import "./config.scss";
+@import "./variables.scss";
 
 body {
   background-color: $pastel-gray;
@@ -9,10 +9,6 @@ body {
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: inherit;
-}
-
-html {
   box-sizing: border-box;
   scroll-behavior: smooth;
 }

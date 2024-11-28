@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
 import {
   faBars,
@@ -52,8 +50,18 @@ function Header() {
 
   // Open and close menu on mobile
   const handleToggleMenu = () => {
-    setShowMenu((prev) => !prev);
+    setShowMenu((prev) => {
+      if (prev) {
+        document.querySelector("body").style.overflow = "auto";
+      } else {
+        document.querySelector("body").style.overflow = "hidden";
+      }
+
+      return !prev;
+    });
   };
+
+  const mobileScreen = width < 1024;
 
   /**
    *
@@ -64,7 +72,7 @@ function Header() {
     dispatch(openModal(modal));
 
     // Only handleToggleMenu if we are in mobile and have an expandable menu
-    width < 1024 && handleToggleMenu();
+    mobileScreen && handleToggleMenu();
   };
 
   useEffect(() => {
@@ -75,11 +83,11 @@ function Header() {
   }, []);
 
   return (
-    <header
+    <nav
       className={`${style.header} ${showMenu && style["header--opened-menu"]}`}
     >
       {/* Show Menu button if we are in a widht of less than 1024 */}
-      {width < 1024 && (
+      {mobileScreen && (
         <IconButton
           noBorder
           ariaLabel="open menu"
@@ -93,7 +101,7 @@ function Header() {
       <Logo className={style["header__logo"]} />
 
       {/* Show menu items if the showMenu flag is true or if we are in desktop, then it should be shown by default */}
-      {(showMenu || width >= 1024) && (
+      {(showMenu || !mobileScreen) && (
         <>
           {links.map((link, index) => (
             <NavLink
@@ -122,6 +130,7 @@ function Header() {
             />
             {wishlistItemsCount > 0 && (
               <motion.p
+                className={style["header__item-count"]}
                 aria-label="wishlist item count"
                 key={wishlistItemsCount}
                 initial={{ scale: 0.8 }}
@@ -144,6 +153,7 @@ function Header() {
             />
             {cartItemsCount > 0 && (
               <motion.p
+                className={style["header__item-count"]}
                 aria-label="cart item count"
                 key={cartItemsCount}
                 initial={{ scale: 0.8 }}
@@ -155,7 +165,7 @@ function Header() {
           </div>
         </>
       )}
-    </header>
+    </nav>
   );
 }
 

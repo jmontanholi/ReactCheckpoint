@@ -1,4 +1,4 @@
-@use "../../assets/styles/config.scss" as *;
+@use "../../styles/variables.scss" as *;
 
 .header {
   display: grid;
@@ -66,24 +66,24 @@
         color: $hookers-green;
       }
     }
+  }
 
-    p {
-      position: absolute;
-      right: -0.5rem;
-      top: -0.5rem;
+  &__item-count {
+    position: absolute;
+    right: 0rem;
+    top: 0rem;
 
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-      min-width: 1rem;
-      min-height: 1rem;
-      padding: 0.2rem;
-      aspect-ratio: 1 / 1;
-      font-size: 0.8rem;
-      border-radius: 50%;
-      background-color: $pastel-gray;
-    }
+    min-width: 1rem;
+    min-height: 1rem;
+    padding: 0.2rem;
+    aspect-ratio: 1 / 1;
+    font-size: 0.8rem;
+    border-radius: 50%;
+    background-color: $pastel-gray;
   }
 
   &__link--active {

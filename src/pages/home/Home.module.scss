@@ -1,4 +1,4 @@
-@use "../../assets/styles/config.scss" as *;
+@use "../../styles/variables.scss" as *;
 
 .home {
   height: calc(100vh - $header-height);
@@ -30,13 +30,13 @@
 
   &__subtitle {
     font-size: 1.5rem;
+  }
 
-    span {
-      font-size: 2rem;
-      border-radius: 0.5rem;
-      padding: 0.5rem;
-      text-decoration: underline;
-    }
+  &__subtitle-span {
+    font-size: 2rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    text-decoration: underline;
   }
 
   &__text {

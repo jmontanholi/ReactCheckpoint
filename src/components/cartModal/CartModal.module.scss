@@ -1,4 +1,4 @@
-@use "../../assets/styles/config.scss" as *;
+@use "../../styles/variables.scss" as *;
 
 .cart-modal {
   height: 80%;
@@ -53,14 +53,19 @@
       background-color: $red;
       cursor: pointer;
     }
+
+    &:focus-visible {
+      border-color: $focus-color;
+      transform: scale(1.2);
+    }
   }
 
   &__total-price {
     font-weight: bold;
+  }
 
-    span {
-      color: $hookers-green;
-    }
+  &__price-span {
+    color: $hookers-green;
   }
 
   &__checkout {
@@ -73,5 +78,9 @@
     border: none;
     border-radius: $border-radius-default;
     padding: 0.5rem;
+
+    &:focus-visible {
+      border-color: $focus-color;
+    }
   }
 }

@@ -89,20 +89,4 @@ describe("Generic Modal", () => {
 
     expect(screen.queryByTestId(/generic modal/i)).not.toBeInTheDocument();
   });
-
-  // Does not work Could not manage to make it work
-  //   test("Closes when user press ESCAPE on keyboard", async () => {
-  //     const user = userEvent.setup();
-
-  //     const { store } = renderModal();
-
-  //     await openModalFunction(store);
-
-  //     const modal = screen.getByTestId(/generic modal/i);
-  //     expect(modal).toBeInTheDocument();
-
-  //     await user.keyboard("{ESCAPE}");
-
-  //     expect(screen.queryByTestId(/generic modal/i)).not.toBeInTheDocument();
-  //   });
 });

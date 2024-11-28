@@ -1,5 +1,5 @@
 // IMPROVED USING GEMINI PRO 1.5
-import { MouseEvent, useEffect, useRef } from "react";
+import { ForwardedRef, forwardRef, MouseEvent, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeModal } from "../../store/slices/modalSlice";
 import { motion } from "framer-motion";
@@ -8,12 +8,17 @@ import { faClose } from "@fortawesome/free-solid-svg-icons";
 import IconButton from "../iconButton/IconButton";
 import { RootState } from "../../store/store";
 
-const Modal: React.FC<{
+interface ModalPropsInterface {
   children: React.ReactNode;
   modal: string;
   title: string;
-}> = ({ children, modal, title }) => {
-  const dialogRef = useRef<HTMLDialogElement | null>(null); // Correct type for dialogRef.
+}
+
+const Modal = forwardRef(function Modal(
+  { children, modal, title }: ModalPropsInterface,
+  ref: ForwardedRef<HTMLButtonElement>
+) {
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
   const dispatch = useDispatch();
   const isOpen = useSelector(
     (state: RootState) => state.modal[`${modal}IsOpen`]
@@ -21,21 +26,20 @@ const Modal: React.FC<{
 
   useEffect(() => {
     if (isOpen && dialogRef.current) {
+      document.querySelector("body").style.overflow = "hidden";
       dialogRef.current.showModal();
-    } else if (!isOpen && dialogRef.current) {
-      dialogRef.current.close(); // Close the dialog when open is false
     }
   }, [isOpen]);
 
   const handleClose = () => {
-    dispatch(closeModal(modal));
+    document.querySelector("body").style.overflow = "auto";
+    dispatch(closeModal());
   };
 
   const handleClick = (event: MouseEvent) => {
-    const target = event.target as Element | null; // Allow for null
+    const target = event.target as Element | null;
 
     if (target && !target.closest(`.${style["modal__content"]}`)) {
-      // Type guard
       handleClose();
     }
   };
@@ -56,10 +60,11 @@ const Modal: React.FC<{
             animate={{ opacity: 1, scale: 1 }}
             className={style["modal__content"]}
           >
-            <h1 aria-label="modal title" className={style["modal__title"]}>
+            <h2 aria-label="modal title" className={style["modal__title"]}>
               {title}
-            </h1>
+            </h2>
             <IconButton
+              ref={ref}
               ariaLabel="close modal"
               handleClick={handleClose}
               className={style["modal__close"]}
@@ -71,6 +76,6 @@ const Modal: React.FC<{
       )}
     </>
   );
-};
+});
 
 export default Modal;

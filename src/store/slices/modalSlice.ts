@@ -24,7 +24,7 @@ const modalSlice = createSlice({
         }
       });
     },
-    closeModal: (state, action: PayloadAction<string>) => {
+    closeModal: (state) => {
       // Map through all the keys in our state and close all of them
       // (Only one should be opened, so we just close all and avoid an if rule)
       Object.keys(state).map((key) => {

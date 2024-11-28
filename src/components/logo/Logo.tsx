@@ -6,12 +6,12 @@ interface LogoProps {
 
 function Logo({ className }: LogoProps) {
   return (
-    <p
+    <h1
       aria-label="logo"
       className={`${style["logo"]} ${className ? className : ""}`}
     >
       cottage core
-    </p>
+    </h1>
   );
 }
 

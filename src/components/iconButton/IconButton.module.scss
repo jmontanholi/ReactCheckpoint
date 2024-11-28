@@ -1,4 +1,4 @@
-@use "../../assets/styles/config.scss" as *;
+@use "../../styles/variables.scss" as *;
 
 .icon-button {
   background-color: transparent;
@@ -24,5 +24,12 @@
   &--no-border:hover {
     cursor: pointer;
     border-color: transparent;
+  }
+
+  &:focus-visible {
+    cursor: pointer;
+    color: $hookers-green;
+    border-color: $focus-color;
+    transform: scale(1.2);
   }
 }

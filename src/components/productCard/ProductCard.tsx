@@ -6,6 +6,7 @@ import {
   faStar,
   faHeart as solidHeart,
 } from "@fortawesome/free-solid-svg-icons";
+import { motion } from "framer-motion";
 
 import style from "./ProductCard.module.scss";
 import formatNumberWithUserLocale from "../../helpers/numberFormater";
@@ -34,6 +35,12 @@ function ProductCard({ product }: ProductCardProps) {
     (item) => item.id === product.id
   );
 
+  const quantityInCart = useSelector(
+    (state: RootState) =>
+      state.cart.products.find((cartItem) => cartItem.product.id === product.id)
+        ?.quantity
+  );
+
   const handleAddToWishlist = () => {
     dispatch(addItemToWishlist(product));
   };
@@ -44,6 +51,12 @@ function ProductCard({ product }: ProductCardProps) {
 
   const handleAddToCart = () => {
     dispatch(addItemToCart(product));
+  };
+
+  const wishlistFunction = () => {
+    return itemIsWishlisted
+      ? handleRemoveFromWishlist()
+      : handleAddToWishlist();
   };
 
   return (
@@ -62,14 +75,14 @@ function ProductCard({ product }: ProductCardProps) {
         className={style["product-card__heart-icon"]}
         icon={itemIsWishlisted ? solidHeart : regularHeart}
         handleClick={() => {
-          itemIsWishlisted ? handleRemoveFromWishlist() : handleAddToWishlist();
+          wishlistFunction();
         }}
       />
       <div className={style["product-card__text-container"]}>
-        <p aria-label="product title" className={style["product-card__title"]}>
+        <p className={style["product-card__title"]}>
           {truncateText(product.title, 23)}
         </p>
-        <p aria-label="product price" className={style["product-card__price"]}>
+        <p className={style["product-card__price"]}>
           {formatNumberWithUserLocale(product.price)}
         </p>
 
@@ -83,12 +96,26 @@ function ProductCard({ product }: ProductCardProps) {
             ({product.rating.count})
           </p>
         </div>
-        <IconButton
-          ariaLabel="add to cart"
-          handleClick={handleAddToCart}
-          className={style["product-card__cart-icon"]}
-          icon={faCartPlus}
-        />
+        <div className={style["product-card__cart-container"]}>
+          <IconButton
+            ariaLabel="add to cart"
+            handleClick={handleAddToCart}
+            className={style["product-card__cart-icon"]}
+            icon={faCartPlus}
+          />
+
+          {quantityInCart > 0 && (
+            <motion.span
+              className={style["product-card__cart-count"]}
+              aria-label="product cart count"
+              key={quantityInCart}
+              initial={{ scale: 0.5 }}
+              animate={{ scale: 1 }}
+            >
+              {quantityInCart}
+            </motion.span>
+          )}
+        </div>
       </div>
     </li>
   );

@@ -6,8 +6,10 @@ import style from "./CartModal.module.scss";
 import formatNumberWithUserLocale from "../../helpers/numberFormater";
 import CartItem from "./CartItem";
 import { removeAllFromCart } from "../../store/slices/cartSlice";
+import { KeyboardEvent, useRef } from "react";
 
 function WishlistModal() {
+  const closeBtnRef = useRef<HTMLButtonElement>();
   const dispatch = useDispatch();
 
   const { products: cartItems, totalPrice } = useSelector(
@@ -18,13 +20,21 @@ function WishlistModal() {
     dispatch(removeAllFromCart());
   };
 
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === "Tab" && closeBtnRef.current) {
+      event.preventDefault();
+      closeBtnRef.current.focus();
+    }
+  };
+
+  const sectionClass =
+    cartItems.length > 0 ? style["cart-modal__with-items"] : "";
+
   return (
-    <Modal title="cart" modal="cartModal">
+    <Modal title="cart" modal="cartModal" ref={closeBtnRef}>
       <section
         aria-label="cart modal"
-        className={`${style["cart-modal"]} ${
-          cartItems.length > 0 ? style["cart-modal__with-items"] : ""
-        }`}
+        className={`${style["cart-modal"]} ${sectionClass}`}
         data-testid="cart-modal"
       >
         {cartItems.length > 0 ? (
@@ -40,7 +50,9 @@ function WishlistModal() {
                 className={style["cart-modal__total-price"]}
               >
                 Total Price:{" "}
-                <span>{formatNumberWithUserLocale(totalPrice)}</span>
+                <span className={style["cart-modal__price-span"]}>
+                  {formatNumberWithUserLocale(totalPrice)}
+                </span>
               </p>
               <button
                 className={style["cart-modal__clear-cart"]}
@@ -50,7 +62,12 @@ function WishlistModal() {
                 Clear cart
               </button>
             </div>
-            <button className={style["cart-modal__checkout"]}>Checkout</button>
+            <button
+              className={style["cart-modal__checkout"]}
+              onKeyDown={handleKeyDown}
+            >
+              Checkout
+            </button>
           </>
         ) : (
           <p
