@@ -9,16 +9,12 @@ const renderHomePage = () => {
 describe("Home page", () => {
   test("Renders a welcome message", () => {
     renderHomePage();
-    expect(screen.getByRole("heading")).toHaveTextContent(/welcome to/i);
+    expect(screen.getByText(/welcome to/i)).toBeInTheDocument();
   });
 
-  test("Renders a logo inside the heading", () => {
+  test("Renders a logo", () => {
     renderHomePage();
-    const heading = screen.getByRole("heading");
-
-    expect(within(heading).getByLabelText("logo")).toHaveTextContent(
-      /cottage core/i
-    );
+    expect(screen.getByRole("heading")).toHaveTextContent(/cottage core/i);
   });
 
   test("Renders a call to action", () => {

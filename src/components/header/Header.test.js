@@ -37,7 +37,7 @@ describe("Header in mobile and tablets", () => {
 
   test("Renders logo", () => {
     renderHeader(767);
-    const logo = screen.getByRole("paragraph", {
+    const logo = screen.getByRole("heading", {
       name: /logo/i,
     });
     expect(logo).toBeInTheDocument();
@@ -251,7 +251,7 @@ describe("Header in desktop", () => {
 
   test("Renders logo", () => {
     renderHeader(1024);
-    const logo = screen.getByRole("paragraph", {
+    const logo = screen.getByRole("heading", {
       name: /logo/i,
     });
     expect(logo).toBeInTheDocument();

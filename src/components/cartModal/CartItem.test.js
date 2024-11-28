@@ -21,12 +21,12 @@ describe("CartItem", () => {
     expect(await screen.findByRole("img")).toBeInTheDocument();
   });
 
-  test("Renders price with correct formmating", () => {
+  test("Renders price with correct formating", () => {
     renderCartItem();
 
-    expect(screen.getByRole("paragraph", { name: /price/i })).toHaveTextContent(
-      "€55.99"
-    );
+    expect(
+      screen.getByText(formatNumberWithUserLocale(defaultProduct.product.price))
+    ).toHaveTextContent("€55.99");
   });
 
   test("Renders decrease and increase buttons", () => {
@@ -40,25 +40,23 @@ describe("CartItem", () => {
   test("Renders product title", () => {
     renderCartItem();
 
-    expect(screen.getByRole("paragraph", { name: /title/i })).toHaveTextContent(
-      defaultProduct.product.title
-    );
+    expect(screen.getByText(defaultProduct.product.title)).toBeInTheDocument();
   });
 
   test("Renders product description", () => {
     renderCartItem();
 
     expect(
-      screen.getByRole("paragraph", { name: /description/i })
-    ).toHaveTextContent(defaultProduct.product.description);
+      screen.getByText(defaultProduct.product.description)
+    ).toBeInTheDocument();
   });
 
   test("Renders product price", () => {
     renderCartItem();
 
-    expect(screen.getByRole("paragraph", { name: /price/i })).toHaveTextContent(
-      formatNumberWithUserLocale(defaultProduct.product.price)
-    );
+    expect(
+      screen.getByText(formatNumberWithUserLocale(defaultProduct.product.price))
+    ).toBeInTheDocument();
   });
 
   test("Renders product quantity", () => {

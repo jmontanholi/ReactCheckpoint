@@ -16,7 +16,7 @@ describe("Logo", () => {
   test("Renders correctly", () => {
     renderLogo();
 
-    expect(screen.getByRole("paragraph", { name: /logo/i })).toHaveTextContent(
+    expect(screen.getByRole("heading", { name: /logo/i })).toHaveTextContent(
       /cottage core/i
     );
   });

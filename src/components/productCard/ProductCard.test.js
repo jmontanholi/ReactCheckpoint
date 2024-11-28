@@ -26,19 +26,15 @@ describe("Product Card", () => {
   test("Renders Product title correctly", () => {
     renderProductCard();
 
-    expect(
-      screen.getByRole("paragraph", { name: /product title/i })
-    ).toHaveTextContent(defaultProduct.product.title);
+    expect(screen.getByText(defaultProduct.product.title)).toBeInTheDocument();
   });
 
   test("Renders Product price correctly", () => {
     renderProductCard();
 
     expect(
-      screen.getByRole("paragraph", { name: /product price/i })
-    ).toHaveTextContent(
-      formatNumberWithUserLocale(defaultProduct.product.price)
-    );
+      screen.getByText(formatNumberWithUserLocale(defaultProduct.product.price))
+    ).toBeInTheDocument();
   });
 
   test("Renders Product rating and count correctly", () => {
